@@ -3,7 +3,6 @@
 <head>
 <meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
 
-<link rel="shortcut icon" href="../../images/icon.ico" type="image/x-icon">  
 <link href='file://C://Users//86153//AppData//Roaming//Typora/themes/night/mermaid.dark.css' rel='stylesheet' type='text/css' /><link href='file://C://Users//86153//AppData//Roaming//Typora/themes/night/codeblock.dark.css' rel='stylesheet' type='text/css' /><link href='file://C://Users//86153//AppData//Roaming//Typora/themes/night/sourcemode.dark.css' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; --title-bar-height:20px; }
 .mac-os-11 { --title-bar-height:28px; }
 html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
@@ -1376,10 +1375,10 @@ footer.ty-footer {
     backdrop-filter: blur(1px);
 }
 
- :root {--mermaid-font-zoom:1em ;} 
-</style><title>魔神冷凝</title>
+ :root {--mermaid-font-zoom:1.25em ;} 
+</style><title>machine_level_representation_of_a_program</title>
 </head>
 <body class='typora-export os-windows'><div class='typora-export-content'>
-<div id='write'  class=''><h1 id='魔神冷凝'><span>魔神冷凝</span></h1><h2 id='入门主要是看的吴恩达的机器学习因此记录的东西绝大多数是课上讲过的但很地方也给自己造成了疑惑所以开了一个学习记录'><span>入门主要是看的吴恩达的机器学习，因此记录的东西绝大多数是课上讲过的，但很地方也给自己造成了疑惑，所以开了一个学习记录</span></h2><p>&nbsp;</p><p>&nbsp;</p><h2 id='week1-introduction-linear-regression-with-one-variable-linear-algebra-review'><span>Week_1 Introduction Linear Regression with One Variable Linear Algebra Review</span></h2><h2 id='week2-linear-regression-with-multiple-variablesweek2linearregressionwithmultiplevariableshtml'><a href='./week2/Linear_Regression.html   '><span>Week_2 Linear Regression with Multiple Variables</span></a></h2><p>&nbsp;</p></div></div>
+<div id='write'  class=''><h2 id='3程序的机器级表示'><span>3.程序的机器级表示</span></h2><blockquote><p><span>具体的汇编指令可以看看王爽老师的《汇编原理》，非常地通俗易懂，零基础学习没问题</span></p></blockquote><p><span>基本的指令就不记录了...以后复习汇编的时候可以开一个新专题</span></p><h3 id='控制'><span>控制</span></h3><h4 id='1条件码'><span>1.条件码</span></h4><blockquote><p><span>CPU维护着一组单个位的条件码寄存器，它们描述了最近的算数或逻辑操作的属性。可以检测这些寄存器来执行条件分支指令，最常用：</span></p><p><span>CF：进位标志，最近的操作使最高位产生了进位。对于非符号数来说,不存在溢出的问题,它的进位就相当于符号数中的溢出.</span></p><p><span>ZF：零标志，最近的操作得出的结果为0。</span></p><p><span>SF：符号标志，最近的操作得到的结果为0。</span></p><p><span>OF：溢出标志，最近的操作导致一个补码溢出。而对于符号数来说,不存在进位的问题.两个正数相加(或一个正数减一个负数)得到负数,或是两个负数相加得到正数,就是溢出了.一个正数和一个负数相加不可能溢出。</span></p></blockquote><h4 id='2条件访问码'><span>2.条件访问码</span></h4><blockquote><p><span>根据条件码的某种组合，将一个字节设置为0或1.</span></p></blockquote><p><img src="./img/hh2.jpg" referrerpolicy="no-referrer" alt="hh2"></p><h5 id='用条件传送实现条件分支'><span>用条件传送实现条件分支</span></h5><blockquote><p><span>计算一个条件操作的两种结果，然后再根据条件是否满足从中选取一个。</span></p></blockquote><p><span>例如</span></p><p><img src="./img/hh4.jpg" referrerpolicy="no-referrer"></p><p><span>通常的形式：</span></p><p><span>v = test-expr ? then-expr : else-expr</span></p><h4 id='汇编对循环代码的处理'><span>汇编对循环代码的处理</span></h4><blockquote><p><span>感觉都do-while或者guarantee-do的汇编代码都挺好的理解的，很好地利用了goto代码风格</span></p></blockquote><h4 id='switch语句'><span>switch语句</span></h4><blockquote><p><span>根据一个整数索引值进行多重分支，主要是其中的跳转表利用（cs里面跳转表也挺多的）</span></p></blockquote><p><img src="./img/hh5.jpg" referrerpolicy="no-referrer"></p><p><strong><span>接下来是关于栈的一些知识点，可以去《菜鸡被pwn了》专题看看，理解了那个再看这儿就直接过关了</span></strong></p><h4 id='3数组的分配和访问'><span>3.数组的分配和访问</span></h4><p><span>利用lea指令进行地址的计算，将多维数组展开成一维</span></p><h4 id='4异质的数据结构'><span>4.异质的数据结构</span></h4><p><strong><span>结构</span></strong><span>：主要理解的是字节对齐 放个</span><a href='https://blog.csdn.net/lanzhihui_10086/article/details/44353381'><span>连接</span></a></p><p><strong><span>联合</span></strong><span>：大小为联合里面最大的数据类型，方便了节省内存嘞</span></p><p><img src="./img/hh6.jpg" referrerpolicy="no-referrer"></p><h4 id='5浮点代码的寄存器'><span>5.浮点代码的寄存器</span></h4><p><span>略略略略略略略......</span></p></div></div>
 </body>
 </html>
