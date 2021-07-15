@@ -25,6 +25,8 @@ g=1 ./ (1+exp(-z));
 J = sum(-y'*log(h)-(1-y)'*log(1-h))/m
 ```
 
+![](../img/Week_3/1_9.png )
+
 ### Gradient descent
 
 ![](../img/Week_3/1_3.png)
